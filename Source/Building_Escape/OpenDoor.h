@@ -23,6 +23,8 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void OpenDoor();
+
 private:
 	//The angle of the door's rotation
 	UPROPERTY(VisibleAnywhere) // Any data member under UPROPERTY(VisibleAnywhere) becomes visibe in the engine
@@ -30,4 +32,7 @@ private:
 
 	UPROPERTY(EditAnywhere) // Any data member under UPROPERTY(EditAnywhere) becomes visibe, and can be edited in the engine
 	ATriggerVolume* pressurePlate;
+
+	UPROPERTY(EditAnywhere)
+	AActor* actorThatOpens; // Remember that pawns inherits from Actors 
 };
