@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDING_ESCAPE_API UOpenDoor : public UActorComponent
@@ -25,7 +25,9 @@ protected:
 
 private:
 	//The angle of the door's rotation
+	UPROPERTY(VisibleAnywhere) // Any data member under UPROPERTY(VisibleAnywhere) becomes visibe in the engine
 	float doorRotationAngle = -90.0f;
-		
-	
+
+	UPROPERTY(EditAnywhere) // Any data member under UPROPERTY(EditAnywhere) becomes visibe, and can be edited in the engine
+	ATriggerVolume* pressurePlate;
 };
