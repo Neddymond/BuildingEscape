@@ -19,19 +19,31 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-protected:
-	// Called when the game starts
+	void OpenDoor();
+	void CloseDoor();
+
 	virtual void BeginPlay() override;
 
-	void OpenDoor();
-
 private:
+	// Any data member under UPROPERTY(VisibleAnywhere) becomes visibe in the engine
+	UPROPERTY(EditAnywhere) 
+
 	//The angle of the door's rotation
-	UPROPERTY(VisibleAnywhere) // Any data member under UPROPERTY(VisibleAnywhere) becomes visibe in the engine
 	float doorRotationAngle = -90.0f;
 
-	UPROPERTY(EditAnywhere) // Any data member under UPROPERTY(EditAnywhere) becomes visibe, and can be edited in the engine
+	// Any data member under UPROPERTY(EditAnywhere) becomes visibe, and can be edited in the engine
+	UPROPERTY(EditAnywhere) 
 	ATriggerVolume* pressurePlate;
+
+	UPROPERTY(EditAnywhere)
+	//The time before the door is closed
+	float doorClosedelay = 1.0f;
+
+	//The time it took the door to open
+	float lastDoorOpenTime; 
+
+	//The owning actor
+	AActor* owner;
 
 	AActor* actorThatOpens; // Remember that pawns inherits from Actors 
 };
