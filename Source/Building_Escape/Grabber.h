@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "components/InputComponent.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
@@ -26,5 +27,13 @@ private:
 	//How ahead of the player can we reach in cm
 	float reach = 100.0f;
 
+	//Utility object for moving physics objects around
 	UPhysicsHandleComponent* physicsHandle = nullptr;
+
+	//Implememnt an actor for input binding
+	UInputComponent* inputComponent = nullptr;
+
+	//Ray-cast and grab what's in reach
+	void Grab();
+
 };
