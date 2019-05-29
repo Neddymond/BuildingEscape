@@ -25,8 +25,10 @@ void UOpenDoor::BeginPlay()
 
 	owner = GetOwner();
 
-	//Get the default pawn 
-	GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!pressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s missing pressurePlate"), *GetOwner()->GetName())
+	}
 }
 
 // Open the door to specified rotation
@@ -68,6 +70,11 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
 	float totalMass = 0.0f;
 
 	TArray<AActor*> overlappingActors;
+
+	if (!pressurePlate)
+	{
+		return totalMass;
+	}
 	//find all overlapping actors
 	pressurePlate->GetOverlappingActors(OUT overlappingActors);
 

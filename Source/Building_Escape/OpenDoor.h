@@ -33,7 +33,7 @@ private:
 
 	// Any data member under UPROPERTY(EditAnywhere) becomes visibe, and can be edited in the engine
 	UPROPERTY(EditAnywhere) 
-	ATriggerVolume* pressurePlate;
+	ATriggerVolume* pressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	//The time before the door is closed
@@ -43,7 +43,7 @@ private:
 	float lastDoorOpenTime; 
 
 	//The owning actor
-	AActor* owner;
+	AActor* owner = nullptr;
 
 	//returns total mass in kg
 	float GetTotalMassOfActorsOnPlate();
