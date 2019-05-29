@@ -45,5 +45,6 @@ private:
 	//The owning actor
 	AActor* owner;
 
-	AActor* actorThatOpens; // Remember that pawns inherits from Actors 
+	//returns total mass in kg
+	float GetTotalMassOfActorsOnPlate();
 };
