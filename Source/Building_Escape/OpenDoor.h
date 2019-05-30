@@ -7,6 +7,8 @@
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDING_ESCAPE_API UOpenDoor : public UActorComponent
 {
@@ -41,6 +43,9 @@ private:
 
 	//The time it took the door to open
 	float lastDoorOpenTime; 
+
+	UPROPERTY(BlueprintAssignable)
+	FOnOpenRequest onOpenRequest;
 
 	//The owning actor
 	AActor* owner = nullptr;
