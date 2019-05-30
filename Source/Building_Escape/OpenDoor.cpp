@@ -31,39 +31,21 @@ void UOpenDoor::BeginPlay()
 	}
 }
 
-// Open the door to specified rotation
-void UOpenDoor::OpenDoor()
-{
-	//Create a rotator; Set the door rotation
-	//owner->SetActorRotation(FRotator(0.0f, doorRotationAngle, 0.0f));
-
-	onOpenRequest.Broadcast();
-}
-
-// Close the door to specified rotation
-void UOpenDoor::CloseDoor()
-{
-	owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
-}
-
-
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//Poll the TriggerVolume
-	if (GetTotalMassOfActorsOnPlate() > 30.0f)
+	if (GetTotalMassOfActorsOnPlate() > triggerMass)
 	{
-		OpenDoor();
-
-		lastDoorOpenTime = GetWorld()->GetTimeSeconds(); // Returns time in seconds since the world was brought up for play
+		// Event to open the door, exposed to blueprint
+		onOpen.Broadcast();
 	}
-
-	//If true, close the door
-	if (GetWorld()->GetTimeSeconds() - lastDoorOpenTime > doorClosedelay)
+	else
 	{
-		CloseDoor();
+		// Event to close the door, exposed to blueprint
+		onClose.Broadcast();
 	}
 }
 
